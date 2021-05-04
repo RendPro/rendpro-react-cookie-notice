@@ -5,19 +5,19 @@ A simple and customizable cookie notice bar for use in React websites.
 ## Installation
 
 ```shell
-  npm install rendpro-react-cookie-notice
+  npm install @rendpro/react-cookie-notice
 ```
 
 or
 
 ```shell
-  yarn add rendpro-react-cookie-notice
+  yarn add @rendpro/react-cookie-notice
 ```
 
 ## Using
 
 ```js
-import CookieNotice from "rendpro-react-cookie-notice";
+import CookieNotice from "@rendpro/react-cookie-notice";
 ```
 
 Then you can use the component anywhere in you React application
@@ -56,7 +56,7 @@ Then you can use the component anywhere in you React application
 ```js
 import React from "react";
 import { css } from "styled-components";
-import CookieNotice from "rendpro-react-cookie-notice";
+import CookieNotice from "@rendpro/react-cookie-notice";
 import { BrowserRouter, Route, Link } from "react-router-dom";
 
 const App = () => (

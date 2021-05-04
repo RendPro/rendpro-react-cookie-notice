@@ -1,5 +1,5 @@
 {
-  "name": "rendpro-react-cookie-notice",
+  "name": "@rendpro/react-cookie-notice",
   "description": "A simple and customizable cookie notice bar for use in React websites.",
   "author": "@rendpro",
   "main": "dist/index.js",
