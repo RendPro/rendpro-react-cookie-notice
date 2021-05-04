@@ -5,8 +5,10 @@
   "main": "dist/index.js",
   "module": "dist/index.js",
   "types": "dist/index.d.ts",
-  "version": "1.0.0",
+  "version": "1.0.1",
+  "repository": "https://github.com/RendPro/rendpro-react-cookie-notice",
   "private": false,
+  "license": "MIT",
   "dependencies": {
     "react-use": "^17.2.4",
     "styled-components": "^5.2.3"
