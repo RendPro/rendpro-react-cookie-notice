@@ -21,7 +21,7 @@
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
-    "publish:npm": "tsc src/dist/* --module commonjs --outDir dist --jsx react --esModuleInterop --declaration"
+    "publish:npm": "tsc src/lib/* --module commonjs --outDir dist --jsx react --esModuleInterop --declaration"
   },
   "eslintConfig": {
     "extends": [
