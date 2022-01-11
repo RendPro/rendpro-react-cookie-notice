@@ -1,7 +1,6 @@
-import React, { FC, MouseEvent, useEffect, useState } from "react";
+import React, { FC, useEffect, useState } from "react";
 import styled, { css, FlattenSimpleInterpolation } from "styled-components";
 import { useCookie } from "react-use";
-import { Link } from "@reach/router";
 
 interface StyledProps {
   $isActive?: boolean;
@@ -105,7 +104,9 @@ const CookieNotice: FC<Props> = ({
   expires: expiresProp,
   foregroundColor: foregroundColorProp,
   linksColor: linksColorProp,
-  setCookie: setCookieProp,
+  setCookie = true,
+  onCookieSet,
+  onHide,
 }) => {
   const buttonText = buttonTextProp || "Accept";
   const text =
@@ -125,27 +126,32 @@ const CookieNotice: FC<Props> = ({
   const expires = expiresProp || new Date().getDate() + 7;
   const foregroundColor = foregroundColorProp || "rgb(168, 168, 168)";
   const linksColor = linksColorProp || "rgb(231, 181, 46)";
-  const setCookie =
-    setCookieProp === undefined || setCookieProp === null
-      ? true
-      : setCookieProp;
 
   const [isCookie, setIsCookie] = useCookie("cookie-information");
   const [canBeDisplayed, setCanBeDisplayed] = useState(false);
   const [isHidden, setIsHidden] = useState(false);
 
   const handleOnClick = () => {
-    console.log(setCookieProp);
-    if (setCookie)
+    if (setCookie) {
       setIsCookie("cookie-information", {
         expires,
       });
-    else setIsHidden(true);
+      onCookieSet && onCookieSet();
+    } else {
+      setIsHidden(true);
+      onHide && onHide();
+    }
   };
 
   useEffect(() => {
     setTimeout(() => setCanBeDisplayed(true), 1000);
   }, []);
+
+  useEffect(() => {
+    if (isCookie) {
+      onHide && onHide();
+    }
+  }, [isCookie]);
 
   return (
     <>
@@ -203,6 +209,8 @@ interface Props {
   text?: string;
   links?: { name: string; link: string; customComponent?: any }[];
   buttonText?: string;
+  onCookieSet?: () => void;
+  onHide?: () => void;
 }
 
 export default CookieNotice;

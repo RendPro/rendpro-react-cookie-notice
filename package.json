@@ -5,7 +5,7 @@
   "main": "dist/index.js",
   "module": "dist/index.js",
   "types": "dist/index.d.ts",
-  "version": "1.0.2",
+  "version": "1.0.5",
   "repository": "https://github.com/RendPro/rendpro-react-cookie-notice",
   "private": false,
   "license": "MIT",
@@ -21,7 +21,8 @@
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
-    "publish:npm": "tsc src/lib/* --module commonjs --outDir dist --jsx react --esModuleInterop --declaration"
+    "prepublish": "tsc src/lib/* --module commonjs --outDir dist --jsx react --esModuleInterop --declaration",
+    "publish:npm": "yarn prepublish"
   },
   "eslintConfig": {
     "extends": [
@@ -58,6 +59,8 @@
     "@types/react-dom": "^17.0.0",
     "@types/react-router-dom": "^5.1.7",
     "@types/styled-components": "^5.1.9",
+    "prettier": "^2.5.1",
+    "react": "^17.0.2",
     "react-dom": "^17.0.2",
     "react-router-dom": "^5.2.0",
     "react-scripts": "4.0.3",

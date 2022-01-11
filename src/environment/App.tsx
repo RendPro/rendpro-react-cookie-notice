@@ -1,6 +1,6 @@
 import React from "react";
 import { css } from "styled-components";
-import CookieNotice from "../dist/";
+import CookieNotice from "../lib/index";
 import { BrowserRouter, Route, Link } from "react-router-dom";
 
 const App = () => (
@@ -35,6 +35,8 @@ const App = () => (
               box-shadow: 0 5px 20px rgba(0, 0, 0, 0.2);
             }
           `}
+          onCookieSet={() => console.log("cookie set")}
+          onHide={() => console.log("is hide")}
         />
       </Route>
       <Route path="/" exact>
