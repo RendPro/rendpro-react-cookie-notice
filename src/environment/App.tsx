@@ -1,6 +1,7 @@
 import React from "react";
 import { BrowserRouter, Route, Link, Routes } from "react-router-dom";
-import CookieNotice from "../lib";
+import CookieNotice from "../../dist";
+import "../../dist/style.css";
 import "./App.styles.css";
 
 const App = () => (

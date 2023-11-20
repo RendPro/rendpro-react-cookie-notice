@@ -3,45 +3,20 @@
   "description": "A simple and customizable cookie notice bar for use in React websites.",
   "author": "@rendpro",
   "main": "dist/index.js",
-  "module": "dist/index.js",
+  "module": "dist/index.mjs",
   "types": "dist/index.d.ts",
   "version": "2.0.0",
   "repository": "https://github.com/RendPro/rendpro-react-cookie-notice",
   "private": false,
   "license": "MIT",
-  "dependencies": {
-    "clsx": "^2.0.0",
-    "react-use": "^17.4.0"
-  },
-  "peerDependencies": {
-    "react": "^18.2.0"
+  "exports": {
+    "style": "./dist/style.css"
   },
   "scripts": {
-    "start": "react-scripts start",
-    "build": "react-scripts build",
-    "test": "react-scripts test",
-    "eject": "react-scripts eject",
-    "build:package": "bun run build.ts && bun run build:declaration",
-    "build:declaration": "tsc --emitDeclarationOnly --project tsconfig.types.json",
+    "dev": "vite",
+    "test": "jest",
+    "build": "tsc && vite build",
     "publish:npm": "yarn prepublish"
-  },
-  "eslintConfig": {
-    "extends": [
-      "react-app",
-      "react-app/jest"
-    ]
-  },
-  "browserslist": {
-    "production": [
-      ">0.2%",
-      "not dead",
-      "not op_mini all"
-    ],
-    "development": [
-      "last 1 chrome version",
-      "last 1 firefox version",
-      "last 1 safari version"
-    ]
   },
   "files": [
     "dist/index.js",
@@ -49,6 +24,13 @@
     "LICENSE",
     "README.md"
   ],
+  "dependencies": {
+    "clsx": "^2.0.0",
+    "react-use": "^17.4.0"
+  },
+  "peerDependencies": {
+    "react": "^18.2.0"
+  },
   "devDependencies": {
     "@testing-library/jest-dom": "^6.1.4",
     "@testing-library/react": "^14.1.2",
@@ -57,14 +39,15 @@
     "@types/react": "^18.2.37",
     "@types/react-dom": "^18.2.15",
     "@types/react-router-dom": "^5.3.3",
+    "@vitejs/plugin-react": "^4.2.0",
     "bun-types": "^1.0.13",
     "prettier": "^3.1.0",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-router-dom": "^6.19.0",
-    "react-scripts": "^5.0.1",
     "scss": "^0.2.4",
     "typescript": "^5.2.2",
-    "web-vitals": "^3.5.0"
+    "vite": "^5.0.0",
+    "vite-plugin-dts": "^3.6.3"
   }
 }
