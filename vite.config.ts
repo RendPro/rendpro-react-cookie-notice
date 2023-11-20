@@ -10,7 +10,7 @@ export default defineConfig({
     lib: {
       entry: resolve(__dirname, "./src/lib/index.tsx"),
       fileName: "index",
-      formats: ["cjs", "es"],
+      formats: ["es"],
     },
     minify: true,
     rollupOptions: {

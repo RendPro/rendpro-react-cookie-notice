@@ -2,18 +2,15 @@
   "name": "@rendpro/react-cookie-notice",
   "description": "A simple and customizable cookie notice bar for use in React websites.",
   "author": "@rendpro",
-  "main": "dist/index.js",
-  "module": "dist/index.mjs",
+  "main": "dist/index.mjs",
   "types": "dist/index.d.ts",
-  "version": "2.0.2",
+  "version": "2.1.0",
   "repository": "https://github.com/RendPro/rendpro-react-cookie-notice",
   "private": false,
   "license": "MIT",
   "exports": {
     ".": {
       "import": "./dist/index.mjs",
-      "require": "./dist/index.js",
-      "default": "./dist/index.js",
       "types": "./dist/index.d.ts",
       "styles": "./dist/style.css"
     }
