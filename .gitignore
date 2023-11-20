@@ -24,3 +24,12 @@ yarn-error.log*
 
 src/react-app-env.d.ts
 dist/*
+
+# editor directories and files
+.idea
+.vscode
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+*.sw?

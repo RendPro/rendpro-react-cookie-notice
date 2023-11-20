@@ -3,44 +3,20 @@
   "description": "A simple and customizable cookie notice bar for use in React websites.",
   "author": "@rendpro",
   "main": "dist/index.js",
-  "module": "dist/index.js",
+  "module": "dist/index.mjs",
   "types": "dist/index.d.ts",
-  "version": "1.0.5",
+  "version": "2.0.0",
   "repository": "https://github.com/RendPro/rendpro-react-cookie-notice",
   "private": false,
   "license": "MIT",
-  "dependencies": {
-    "react-use": "^17.2.4",
-    "styled-components": "^5.2.3"
-  },
-  "peerDependencies": {
-    "react": "^17.0.2"
+  "exports": {
+    "styles": "./dist/style.css"
   },
   "scripts": {
-    "start": "react-scripts start",
-    "build": "react-scripts build",
-    "test": "react-scripts test",
-    "eject": "react-scripts eject",
-    "prepublish": "tsc src/lib/* --module commonjs --outDir dist --jsx react --esModuleInterop --declaration",
+    "dev": "vite",
+    "test": "jest",
+    "build": "tsc && vite build",
     "publish:npm": "yarn prepublish"
-  },
-  "eslintConfig": {
-    "extends": [
-      "react-app",
-      "react-app/jest"
-    ]
-  },
-  "browserslist": {
-    "production": [
-      ">0.2%",
-      "not dead",
-      "not op_mini all"
-    ],
-    "development": [
-      "last 1 chrome version",
-      "last 1 firefox version",
-      "last 1 safari version"
-    ]
   },
   "files": [
     "dist/index.js",
@@ -48,23 +24,30 @@
     "LICENSE",
     "README.md"
   ],
+  "dependencies": {
+    "clsx": "^2.0.0",
+    "react-use": "^17.4.0"
+  },
+  "peerDependencies": {
+    "react": "^18.2.0"
+  },
   "devDependencies": {
-    "@testing-library/jest-dom": "^5.11.4",
-    "@testing-library/react": "^11.1.0",
-    "@testing-library/user-event": "^12.1.10",
-    "@types/jest": "^26.0.15",
-    "@types/node": "^12.0.0",
-    "@types/reach__router": "^1.3.7",
-    "@types/react": "^17.0.0",
-    "@types/react-dom": "^17.0.0",
-    "@types/react-router-dom": "^5.1.7",
-    "@types/styled-components": "^5.1.9",
-    "prettier": "^2.5.1",
-    "react": "^17.0.2",
-    "react-dom": "^17.0.2",
-    "react-router-dom": "^5.2.0",
-    "react-scripts": "4.0.3",
-    "typescript": "^4.1.2",
-    "web-vitals": "^1.0.1"
+    "@testing-library/jest-dom": "^6.1.4",
+    "@testing-library/react": "^14.1.2",
+    "@testing-library/user-event": "^14.5.1",
+    "@types/jest": "^29.5.8",
+    "@types/react": "^18.2.37",
+    "@types/react-dom": "^18.2.15",
+    "@types/react-router-dom": "^5.3.3",
+    "@vitejs/plugin-react": "^4.2.0",
+    "bun-types": "^1.0.13",
+    "prettier": "^3.1.0",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0",
+    "react-router-dom": "^6.19.0",
+    "scss": "^0.2.4",
+    "typescript": "^5.2.2",
+    "vite": "^5.0.0",
+    "vite-plugin-dts": "^3.6.3"
   }
 }
