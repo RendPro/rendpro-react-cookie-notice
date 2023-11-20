@@ -5,19 +5,15 @@ A simple and customizable cookie notice bar for use in React websites.
 ## Installation
 
 ```shell
+  bun add @rendpro/react-cookie-notice
+```
+or
+```shell
   npm install @rendpro/react-cookie-notice
 ```
-
 or
-
 ```shell
   yarn add @rendpro/react-cookie-notice
-```
-
-or
-
-```shell
-  bun add @rendpro/react-cookie-notice
 ```
 
 ## How to use it
