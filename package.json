@@ -10,7 +10,7 @@
   "private": false,
   "license": "MIT",
   "exports": {
-    "style": "./dist/style.css"
+    "styles": "./dist/style.css"
   },
   "scripts": {
     "dev": "vite",

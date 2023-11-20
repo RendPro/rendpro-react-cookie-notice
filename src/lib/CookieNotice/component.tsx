@@ -4,25 +4,24 @@ import clsx from "clsx";
 import { CookieNoticeProps } from "./component.types";
 import "./component.styles.scss";
 
-const CookieNotice: FC<CookieNoticeProps> = (props) => {
-  const buttonText = props.buttonText || "Accept";
-  const text =
-    props.text ||
-    `This website uses cookies to improve and facilitate access to the website and to keep statistical data. Your continued use of
-  using this site constitutes acceptance of this.`;
-  const links = props.links || [
+const CookieNotice: FC<CookieNoticeProps> = ({
+  buttonText = "Accept",
+  text = "This website uses cookies to improve and facilitate access to the website and to keep statistical data. Your continued use of using this site constitutes acceptance of this.",
+  links = [
     { name: "Privacy policy", link: "#" },
     { name: "How to disable cookie?", link: "#" },
     { name: "Cybersecurity", link: "#" },
-  ];
-  const expires = props.expires || new Date().getDate() + 7;
-
+  ],
+  expires = new Date().getDate() + 7,
+  setCookie = true,
+  ...props
+}) => {
   const [isCookie, setIsCookie] = useCookie("cookie-information");
-  const [canBeDisplayed, setCanBeDisplayed] = useState(false);
-  const [isHidden, setIsHidden] = useState(false);
+  const [canBeDisplayed, setCanBeDisplayed] = useState<boolean>(false);
+  const [isHidden, setIsHidden] = useState<boolean>(false);
 
   const handleOnClick = () => {
-    if (props.setCookie) {
+    if (setCookie) {
       setIsCookie("cookie-information", {
         expires,
       });
@@ -35,15 +34,15 @@ const CookieNotice: FC<CookieNoticeProps> = (props) => {
 
   useEffect(() => {
     setTimeout(() => setCanBeDisplayed(true), 1000);
-  }, []);
+  }, [setCanBeDisplayed]);
 
   useEffect(() => {
     if (isCookie) {
       props.onHide?.();
     }
-  }, [isCookie]);
+  }, [isCookie, props.onHide]);
 
-  const isActive = props.setCookie ? !isCookie && canBeDisplayed : !isHidden;
+  const isActive = setCookie ? !isCookie && canBeDisplayed : !isHidden;
 
   return (
     <>
