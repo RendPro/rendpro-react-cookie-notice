@@ -4,16 +4,16 @@
   "author": "@rendpro",
   "main": "dist/index.mjs",
   "types": "dist/index.d.ts",
-  "version": "2.1.0",
+  "version": "2.1.1",
   "repository": "https://github.com/RendPro/rendpro-react-cookie-notice",
   "private": false,
   "license": "MIT",
   "exports": {
     ".": {
       "import": "./dist/index.mjs",
-      "types": "./dist/index.d.ts",
-      "styles": "./dist/style.css"
-    }
+      "types": "./dist/index.d.ts"
+    },
+    "./styles": "./dist/style.css"
   },
   "scripts": {
     "dev": "vite",
