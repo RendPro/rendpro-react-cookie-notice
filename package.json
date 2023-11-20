@@ -5,7 +5,7 @@
   "main": "dist/index.js",
   "module": "dist/index.mjs",
   "types": "dist/index.d.ts",
-  "version": "2.0.0",
+  "version": "2.0.1",
   "repository": "https://github.com/RendPro/rendpro-react-cookie-notice",
   "private": false,
   "license": "MIT",
@@ -19,10 +19,9 @@
     "publish:npm": "yarn prepublish"
   },
   "files": [
-    "dist/index.js",
-    "dist/index.d.ts",
     "LICENSE",
-    "README.md"
+    "README.md",
+    "dist/**/*"
   ],
   "dependencies": {
     "clsx": "^2.0.0",
