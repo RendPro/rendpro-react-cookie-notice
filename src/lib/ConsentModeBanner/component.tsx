@@ -1,5 +1,8 @@
 import React from "react";
-import { ConsentModeBannerProps, ConsentModeBannerClassNames } from "./component.types";
+import {
+  ConsentModeBannerProps,
+  ConsentModeBannerClassNames,
+} from "./component.types";
 import "./component.styles.scss";
 
 const getClassNames = (classNames?: ConsentModeBannerClassNames) => {
@@ -18,7 +21,7 @@ const getClassNames = (classNames?: ConsentModeBannerClassNames) => {
     denyAll: "rendpro-consentmode-banner__denyAll",
     save: "rendpro-consentmode-banner__save",
     grantAll: "rendpro-consentmode-banner__grantAll",
-  }
+  };
 
   if (!classNames) {
     return defaultClassNames;
@@ -28,7 +31,7 @@ const getClassNames = (classNames?: ConsentModeBannerClassNames) => {
     ...defaultClassNames,
     ...classNames,
   };
-}
+};
 
 const CookieNotice: React.FC<ConsentModeBannerProps> = ({
   title,
@@ -37,6 +40,7 @@ const CookieNotice: React.FC<ConsentModeBannerProps> = ({
   consents,
   denyAllLabel,
   grantAllLabel,
+  saveLabel,
   onConsentChange,
   onDenyAll,
   onGrantAll,
@@ -46,37 +50,50 @@ const CookieNotice: React.FC<ConsentModeBannerProps> = ({
   const classNames = getClassNames(customClassNames);
 
   const [isOpened, setIsOpened] = React.useState<boolean>(true);
-  const [consentsState, setConsentsState] = React.useState<{ [key: string]: boolean }>(
-    consents.reduce((acc, { id, defaultChecked }) => ({ ...acc, [id]: defaultChecked }), {})
+  const [consentsState, setConsentsState] = React.useState<{
+    [key: string]: boolean;
+  }>(
+    consents.reduce(
+      (acc, { id, defaultChecked }) => ({ ...acc, [id]: defaultChecked }),
+      {}
+    )
   );
 
-  const handleConsentChange = (id: string): React.ChangeEventHandler<HTMLInputElement> => (event) => {
-    // @ts-ignore
-    const checked = (event.target as HTMLInputElement).checked;
+  const handleConsentChange =
+    (id: string): React.ChangeEventHandler<HTMLInputElement> =>
+    (event) => {
+      // @ts-ignore
+      const checked = (event.target as HTMLInputElement).checked;
 
-    const newState = {
-      ...consentsState,
-      [id]: checked,
+      const newState = {
+        ...consentsState,
+        [id]: checked,
+      };
+
+      setConsentsState(newState);
+      onConsentChange?.(newState);
     };
-
-    setConsentsState(newState);
-    onConsentChange?.(newState);
-  }
 
   const handleButtonClick = (callback?: () => void) => () => {
     setIsOpened(false);
     callback?.();
-  }
+  };
 
   const handleDenyAll = handleButtonClick(onDenyAll);
   const handleGrantAll = handleButtonClick(onGrantAll);
   const handleSave = handleButtonClick(() => onSave?.(consentsState));
 
   return (
-    <div className={classNames.wrapper} role="dialog" aria-labelledby="consent-mode-banner">
+    <div
+      className={classNames.wrapper}
+      role="dialog"
+      aria-labelledby="consent-mode-banner"
+    >
       <div className={classNames.frame}>
         <div className={classNames.contentWrapper}>
-          <h2 className={classNames.title} id="consent-mode-banner">{title}</h2>
+          <h2 className={classNames.title} id="consent-mode-banner">
+            {title}
+          </h2>
           <h3 className={classNames.subtitle}>{subtitle}</h3>
           <div className={classNames.description}>{description}</div>
           <div className={classNames.consentsWrapper}>
@@ -94,9 +111,15 @@ const CookieNotice: React.FC<ConsentModeBannerProps> = ({
             ))}
           </div>
           <div className={classNames.buttonsWrapper}>
-            <button className={classNames.denyAll} onClick={handleDenyAll}>{denyAllLabel}</button>
-            <button className={classNames.save} onClick={handleSave}>Save</button>
-            <button className={classNames.grantAll} onClick={handleGrantAll}>{grantAllLabel}</button>
+            <button className={classNames.denyAll} onClick={handleDenyAll}>
+              {denyAllLabel}
+            </button>
+            <button className={classNames.save} onClick={handleSave}>
+              {saveLabel}
+            </button>
+            <button className={classNames.grantAll} onClick={handleGrantAll}>
+              {grantAllLabel}
+            </button>
           </div>
         </div>
       </div>

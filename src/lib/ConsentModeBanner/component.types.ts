@@ -33,6 +33,10 @@ interface ConsentModeBannerProps {
    */
   grantAllLabel: string;
   /**
+   *  The label of the button that allows the user to save the consents.
+   */
+  saveLabel: string;
+  /**
    * Handler called when the user changes the consent.
    */
   onConsentChange?: (consents: { [key: string]: boolean }) => void;

@@ -1,3 +1,5 @@
-import CookieNotice from "./CookieNotice";
-export default CookieNotice;
 export * from "./CookieNotice";
+export { default as CookieNotice } from "./CookieNotice";
+
+export * from "./ConsentModeBanner";
+export { default as ConsentModeBanner } from "./ConsentModeBanner";
