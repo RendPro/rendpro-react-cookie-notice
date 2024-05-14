@@ -41,6 +41,11 @@ interface ConsentModeBannerProps {
    */
   onConsentChange?: (consents: { [key: string]: boolean }) => void;
   /**
+   * Specifies the accent color of the banner.
+   * @default "#1890CC"
+   */
+  color?: string;
+  /**
    * Handler called when the user denies all consents.
    */
   onDenyAll?: () => void;
@@ -53,6 +58,11 @@ interface ConsentModeBannerProps {
    */
   onSave?: (consents: { [key: string]: boolean }) => void;
   /**
+   * Specifies how long the cookie will last.
+   * @default 'new Date().getDate() + 7`
+   */
+  expires?: number | Date;
+  /**
    * Custom class names to apply to the different elements of the component.
    */
   classNames?: ConsentModeBannerClassNames;
@@ -60,7 +70,10 @@ interface ConsentModeBannerProps {
 
 interface ConsentModeBannerClassNames {
   wrapper?: string;
+  innerWrapper?: string;
+  wrapperOpened?: string;
   frame?: string;
+  frameOpened?: string;
   contentWrapper?: string;
   title?: string;
   subtitle?: string;

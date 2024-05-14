@@ -4,11 +4,16 @@ import {
   ConsentModeBannerClassNames,
 } from "./component.types";
 import "./component.styles.scss";
+import cx from "clsx";
+import { useCookie } from "react-use";
 
 const getClassNames = (classNames?: ConsentModeBannerClassNames) => {
   const defaultClassNames: Required<ConsentModeBannerClassNames> = {
     wrapper: "rendpro-consentmode-banner__wrapper",
+    innerWrapper: "rendpro-consentmode-banner__innerWrapper",
+    wrapperOpened: "rendpro-consentmode-banner__wrapper--opened",
     frame: "rendpro-consentmode-banner__frame",
+    frameOpened: "rendpro-consentmode-banner__frame--opened",
     contentWrapper: "rendpro-consentmode-banner__contentWrapper",
     title: "rendpro-consentmode-banner__title",
     subtitle: "rendpro-consentmode-banner__subtitle",
@@ -45,19 +50,36 @@ const CookieNotice: React.FC<ConsentModeBannerProps> = ({
   onDenyAll,
   onGrantAll,
   onSave,
+  color = "#1890CC",
+  expires = new Date().getDate() + 7,
   classNames: customClassNames,
 }) => {
   const classNames = getClassNames(customClassNames);
 
-  const [isOpened, setIsOpened] = React.useState<boolean>(true);
+  const [isCookie, setIsCookie] = useCookie("cookie-consent-mode");
+  const [isOpened, setIsOpened] = React.useState<boolean>(false);
   const [consentsState, setConsentsState] = React.useState<{
     [key: string]: boolean;
   }>(
     consents.reduce(
       (acc, { id, defaultChecked }) => ({ ...acc, [id]: defaultChecked }),
-      {}
-    )
+      {},
+    ),
   );
+
+  React.useEffect(() => {
+    if (!isCookie) {
+      setTimeout(() => setIsOpened(true), 500);
+    }
+  }, []);
+
+  React.useEffect(() => {
+    if (isOpened) {
+      document.body.style.overflow = "hidden";
+    } else {
+      document.body.style.overflow = "auto";
+    }
+  }, [isOpened]);
 
   const handleConsentChange =
     (id: string): React.ChangeEventHandler<HTMLInputElement> =>
@@ -76,6 +98,9 @@ const CookieNotice: React.FC<ConsentModeBannerProps> = ({
 
   const handleButtonClick = (callback?: () => void) => () => {
     setIsOpened(false);
+    setIsCookie("cookie-consent-mode", {
+      expires,
+    });
     callback?.();
   };
 
@@ -85,17 +110,25 @@ const CookieNotice: React.FC<ConsentModeBannerProps> = ({
 
   return (
     <div
-      className={classNames.wrapper}
+      className={cx(classNames.wrapper, isOpened && classNames.wrapperOpened)}
       role="dialog"
       aria-labelledby="consent-mode-banner"
+      style={{
+        // @ts-ignore
+        "--rendpro-consentmode-banner-color": color,
+      }}
     >
-      <div className={classNames.frame}>
-        <div className={classNames.contentWrapper}>
-          <h2 className={classNames.title} id="consent-mode-banner">
-            {title}
-          </h2>
-          <h3 className={classNames.subtitle}>{subtitle}</h3>
-          <div className={classNames.description}>{description}</div>
+      <div className={classNames.innerWrapper}>
+        <div
+          className={cx(classNames.frame, isOpened && classNames.frameOpened)}
+        >
+          <div className={classNames.contentWrapper}>
+            <h2 className={classNames.title} id="consent-mode-banner">
+              {title}
+            </h2>
+            <h3 className={classNames.subtitle}>{subtitle}</h3>
+            <div className={classNames.description}>{description}</div>
+          </div>
           <div className={classNames.consentsWrapper}>
             {consents.map(({ id, label, defaultChecked }) => (
               <label key={id} className={classNames.consent}>

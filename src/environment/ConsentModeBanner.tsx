@@ -1,5 +1,5 @@
 import React from "react";
-import { ConsentModeBanner as RendProConsentModeBanner } from "../../dist";
+import RendProConsentModeBanner from "../lib/ConsentModeBanner";
 import { Link } from "react-router-dom";
 
 function ConsentModeBanner() {
@@ -44,7 +44,7 @@ function ConsentModeBanner() {
         ]}
         denyAllLabel="Odmowa"
         grantAllLabel="Zezwól na wszystkie"
-        saveLabel="Zapisz i zamknij"
+        saveLabel="Zapisz"
       />
     </>
   );
