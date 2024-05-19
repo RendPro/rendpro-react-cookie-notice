@@ -1,5 +1,8 @@
 import React from "react";
-import RendProConsentModeBanner from "../lib/ConsentModeBanner";
+import RendProConsentModeBanner, {
+  defaultConsents,
+  defaultHandlers,
+} from "../lib/ConsentModeBanner";
 import { Link } from "react-router-dom";
 
 function ConsentModeBanner() {
@@ -20,31 +23,16 @@ function ConsentModeBanner() {
             <Link to="/privacy-policy">Polityce Prywatności</Link>.
           </>
         }
-        consents={[
-          {
-            id: "essential",
-            label: "Niezbędne",
-            defaultChecked: false,
-          },
-          {
-            id: "preferences",
-            label: "Preferencje",
-            defaultChecked: true,
-          },
-          {
-            id: "statistics",
-            label: "Statystyki",
-            defaultChecked: true,
-          },
-          {
-            id: "marketing",
-            label: "Marketing",
-            defaultChecked: true,
-          },
-        ]}
         denyAllLabel="Odmowa"
         grantAllLabel="Zezwól na wszystkie"
         saveLabel="Zapisz"
+        {...defaultConsents({
+          essential: "Niezbędne",
+          preferences: "Preferencje",
+          statistics: "Statystyki",
+          marketing: "Marketing",
+        })}
+        {...defaultHandlers()}
       />
     </>
   );

@@ -5,7 +5,7 @@ import {
 } from "./component.types";
 import "./component.styles.scss";
 import cx from "clsx";
-import { useCookie } from "react-use";
+import { useCookie, useLocalStorage } from "react-use";
 
 const getClassNames = (classNames?: ConsentModeBannerClassNames) => {
   const defaultClassNames: Required<ConsentModeBannerClassNames> = {
@@ -56,11 +56,13 @@ const CookieNotice: React.FC<ConsentModeBannerProps> = ({
 }) => {
   const classNames = getClassNames(customClassNames);
 
-  const [isCookie, setIsCookie] = useCookie("cookie-consent-mode");
+  const consentIds = consents.map(({ id }) => id);
+  const [isCookie, setIsCookie] = useCookie("@rendpro/consent-mode-banner");
   const [isOpened, setIsOpened] = React.useState<boolean>(false);
-  const [consentsState, setConsentsState] = React.useState<{
+  const [consentsState, setConsentsState] = useLocalStorage<{
     [key: string]: boolean;
   }>(
+    "@rendpro/consent-mode-banner:consents",
     consents.reduce(
       (acc, { id, defaultChecked }) => ({ ...acc, [id]: defaultChecked }),
       {},
@@ -72,6 +74,12 @@ const CookieNotice: React.FC<ConsentModeBannerProps> = ({
       setTimeout(() => setIsOpened(true), 500);
     }
   }, []);
+
+  React.useEffect(() => {
+    if (isCookie && consentsState) {
+      onSave?.(consentsState);
+    }
+  }, [isCookie, consentsState]);
 
   React.useEffect(() => {
     if (isOpened) {
@@ -96,17 +104,26 @@ const CookieNotice: React.FC<ConsentModeBannerProps> = ({
       onConsentChange?.(newState);
     };
 
-  const handleButtonClick = (callback?: () => void) => () => {
-    setIsOpened(false);
-    setIsCookie("cookie-consent-mode", {
-      expires,
-    });
-    callback?.();
+  const handleButtonClick = (callback?: () => boolean) => () => {
+    const res = callback?.();
+
+    if (res) {
+      setIsOpened(false);
+      setIsCookie("cookie-consent-mode", {
+        expires,
+      });
+    }
   };
 
-  const handleDenyAll = handleButtonClick(onDenyAll);
-  const handleGrantAll = handleButtonClick(onGrantAll);
-  const handleSave = handleButtonClick(() => onSave?.(consentsState));
+  const handleDenyAll = handleButtonClick(
+    () => onDenyAll?.(consentIds) ?? true,
+  );
+  const handleGrantAll = handleButtonClick(
+    () => onGrantAll?.(consentIds) ?? true,
+  );
+  const handleSave = handleButtonClick(
+    () => onSave?.(consentsState ?? {}) ?? true,
+  );
 
   return (
     <div

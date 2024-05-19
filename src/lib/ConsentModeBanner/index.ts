@@ -6,3 +6,5 @@ import {
 
 export type { ConsentModeBannerClassNames, ConsentModeBannerProps };
 export default ConsentModeBanner;
+export * from "./defaultHandlers";
+export * from "./defaultConsents";

@@ -1,5 +1,5 @@
 import React from "react";
-import { BrowserRouter, Route, Routes } from "react-router-dom";
+import { BrowserRouter, Link, Route, Routes } from "react-router-dom";
 import CookieNotice from "./CookieNotice";
 import ConsentModeBanner from "./ConsentModeBanner";
 import "../../dist/style.css";
@@ -9,7 +9,19 @@ const App = () => (
   <BrowserRouter>
     <Routes>
       <Route path="/cookie-notice" element={<CookieNotice />} />
-      <Route path="/" element={<h1>Index</h1>} />
+      <Route
+        path="/"
+        element={
+          <ul>
+            <li>
+              <Link to="/cookie-notice">Cookie Notice</Link>
+            </li>
+            <li>
+              <Link to="/consent-mode-banner">Consent Mode Banner</Link>
+            </li>
+          </ul>
+        }
+      />
       <Route
         path="/consent-mode-banner"
         element={
