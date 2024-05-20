@@ -19,7 +19,9 @@ const defineHandler =
     return handler(...args);
   };
 
-(window as any).dataLayer = (window as any).dataLayer ?? [];
+if (typeof window !== "undefined") {
+  (window as any).dataLayer = (window as any).dataLayer ?? [];
+}
 
 const gtag: G = function () {
   (window as any).dataLayer.push(arguments);
