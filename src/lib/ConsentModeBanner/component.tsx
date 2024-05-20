@@ -69,6 +69,25 @@ const CookieNotice: React.FC<ConsentModeBannerProps> = ({
     ),
   );
 
+  const allGrantedState = React.useMemo(() => {
+    return consents.reduce(
+      (acc, { id }) => ({
+        ...acc,
+        [id]: true,
+      }),
+      {},
+    );
+  }, [consents]);
+  const allDeniedState = React.useMemo(() => {
+    return consents.reduce(
+      (acc, { id }) => ({
+        ...acc,
+        [id]: false,
+      }),
+      {},
+    );
+  }, [consents]);
+
   React.useEffect(() => {
     if (!isCookie) {
       setTimeout(() => setIsOpened(true), 500);
@@ -104,25 +123,36 @@ const CookieNotice: React.FC<ConsentModeBannerProps> = ({
       onConsentChange?.(newState);
     };
 
-  const handleButtonClick = (callback?: () => boolean) => () => {
-    const res = callback?.();
+  const handleButtonClick =
+    (callback?: () => boolean, type?: "denyAll" | "grantAll" | "save") =>
+    () => {
+      const res = callback?.();
 
-    if (res) {
-      setIsOpened(false);
-      setIsCookie("cookie-consent-mode", {
-        expires,
-      });
-    }
-  };
+      if (res) {
+        if (type === "denyAll") {
+          setConsentsState(allDeniedState);
+        } else if (type === "grantAll") {
+          setConsentsState(allGrantedState);
+        }
+
+        setIsOpened(false);
+        setIsCookie("cookie-consent-mode", {
+          expires,
+        });
+      }
+    };
 
   const handleDenyAll = handleButtonClick(
     () => onDenyAll?.(consentIds) ?? true,
+    "denyAll",
   );
   const handleGrantAll = handleButtonClick(
     () => onGrantAll?.(consentIds) ?? true,
+    "grantAll",
   );
   const handleSave = handleButtonClick(
     () => onSave?.(consentsState ?? {}) ?? true,
+    "save",
   );
 
   return (
