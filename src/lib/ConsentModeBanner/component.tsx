@@ -5,7 +5,6 @@ import {
   ConsentModeBannerProps,
   ConsentModeBannerClassNames,
 } from "./component.types";
-import "./component.styles.scss";
 import cx from "clsx";
 import { useCookie, useLocalStorage } from "react-use";
 

@@ -2,7 +2,6 @@ import { FC, useEffect, useState } from "react";
 import { useCookie } from "react-use";
 import clsx from "clsx";
 import { CookieNoticeProps } from "./component.types";
-import "./component.styles.scss";
 
 const CookieNotice: FC<CookieNoticeProps> = ({
   buttonText = "Accept",

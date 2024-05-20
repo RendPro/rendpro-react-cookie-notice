@@ -13,12 +13,16 @@
       "import": "./dist/index.mjs",
       "types": "./dist/index.d.ts"
     },
-    "./styles": "./dist/style.css"
+    "./styles-cookie-notice": "./dist/style-cookie-notice.css",
+    "./styles-consent-mode-banner": "./dist/style-consent-mode-banner.css"
   },
   "scripts": {
     "dev": "vite",
     "test": "jest",
-    "build": "tsc && vite build",
+    "build:scss-consent-mode-banner": "bun sass src/lib/ConsentModeBanner/component.styles.scss dist/style-consent-mode-banner.css",
+    "build:scss-cookie-notice": "bun sass src/lib/CookieNotice/component.styles.scss dist/style-cookie-notice.css",
+    "build:scss": "bun build:scss-cookie-notice && bun build:scss-consent-mode-banner",
+    "build": "tsc && vite build && bun build:scss",
     "publish:npm": "yarn prepublish"
   },
   "files": [

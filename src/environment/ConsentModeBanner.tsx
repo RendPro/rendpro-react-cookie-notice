@@ -1,8 +1,9 @@
 import React from "react";
-import RendProConsentModeBanner, {
+import {
+  ConsentModeBanner as RendProConsentModeBanner,
   defaultConsents,
   defaultHandlers,
-} from "../lib/ConsentModeBanner";
+} from "../../dist";
 import { Link } from "react-router-dom";
 
 function ConsentModeBanner() {
