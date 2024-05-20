@@ -1,3 +1,5 @@
+"use client";
+
 export * from "./CookieNotice";
 export { default as CookieNotice } from "./CookieNotice";
 
