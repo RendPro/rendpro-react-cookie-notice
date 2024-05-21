@@ -23,6 +23,7 @@ interface ConsentModeBannerProps<T extends string = string> {
     id: string;
     label: string;
     defaultChecked: boolean;
+    disabled?: boolean;
   }[];
   /**
    * The label of the button that allows the user to deny all consents.
@@ -112,6 +113,7 @@ interface ConsentModeBannerClassNames {
   description?: string;
   consentsWrapper?: string;
   consent?: string;
+  consentDisabled?: string;
   consentLabel?: string;
   consentCheckbox?: string;
   buttonsWrapper?: string;

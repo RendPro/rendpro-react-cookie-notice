@@ -7,6 +7,7 @@ const defaultConsents = (labels: { [key in DefaultConsents]: string }) => {
         id: "essential",
         label: labels.essential,
         defaultChecked: true,
+        disabled: true,
       },
       {
         id: "preferences",

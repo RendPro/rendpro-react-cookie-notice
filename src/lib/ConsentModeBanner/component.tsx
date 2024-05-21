@@ -22,6 +22,7 @@ const getClassNames = (classNames?: ConsentModeBannerClassNames) => {
     consentsWrapper: "rendpro-consentmode-banner__consentsWrapper",
     consent: "rendpro-consentmode-banner__consent",
     consentLabel: "rendpro-consentmode-banner__consentLabel",
+    consentDisabled: "rendpro-consentmode-banner__consent--disabled",
     consentCheckbox: "rendpro-consentmode-banner__consentCheckbox",
     buttonsWrapper: "rendpro-consentmode-banner__buttonsWrapper",
     denyAll: "rendpro-consentmode-banner__denyAll",
@@ -178,15 +179,22 @@ const CookieNotice: React.FC<ConsentModeBannerProps> = ({
             <div className={classNames.description}>{description}</div>
           </div>
           <div className={classNames.consentsWrapper}>
-            {consents.map(({ id, label, defaultChecked }) => (
-              <label key={id} className={classNames.consent}>
+            {consents.map(({ id, label, defaultChecked, disabled }) => (
+              <label
+                key={id}
+                className={cx(
+                  classNames.consent,
+                  disabled && classNames.consentDisabled,
+                )}
+              >
                 <span className={classNames.consentLabel}>{label}</span>
                 <input
                   type="checkbox"
                   id={id}
                   defaultChecked={defaultChecked}
                   className={classNames.consentCheckbox}
-                  onChange={handleConsentChange(id)}
+                  onChange={!disabled ? handleConsentChange(id) : undefined}
+                  disabled={disabled}
                 />
               </label>
             ))}

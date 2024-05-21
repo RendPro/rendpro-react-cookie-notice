@@ -124,6 +124,11 @@
   }
 }
 
+.rendpro-consentmode-banner__consent--disabled {
+  opacity: 0.75;
+  pointer-events: none;
+}
+
 .rendpro-consentmode-banner__consentLabel {
   font-size: 17px;
   font-weight: 700;
